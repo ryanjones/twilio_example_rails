@@ -1,0 +1,20 @@
+<h1>Send a new SMS Message (Twilio Request)</h1>
+
+<%= form_for(:sms_message) do |f| %>
+
+  <div id="phone">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+  
+  <div id="content">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  
+  <div id="submit">
+    <%= submit_tag "Submit Message" %>
+  </div>
+  
+<% end %>
+<%= debug(params) if Rails.env.development? %>
