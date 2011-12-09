@@ -9,6 +9,13 @@ TwilioExampleRails::Application.routes.draw do
       post :status # check message status (fail/success)
     end
   end
+  
+  resource :phone_call, :only => [:new, :incoming] do
+    member do 
+      get :new # create a call
+      post :incoming # incoming phone call
+    end
+  end
 
 
   # The priority is based upon order of creation:
