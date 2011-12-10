@@ -31,7 +31,7 @@
       
       function call() {
         // get the phone number to connect the call to
-        params = {"PhoneNumber": $("#number").val()};
+        params = { "PhoneNumber": $("#number").val()};
         Twilio.Device.connect(params);
       }
       
@@ -41,10 +41,6 @@
       
       function hangup() {
         Twilio.Device.disconnectAll();
-      }
- 
-      function call() {
-        Twilio.Device.connect();
       }
     </script>
   </head>
