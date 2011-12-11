@@ -1,7 +1,5 @@
 -- Twilio example rails app
 
--- SMS
+-- SMS Example
 
-REST API - Make calls, send messages, buy and manage phone numbers.
-TwiML - Dynamically control live phone calls and respond to messages.
-Twilio Client - Make and receive calls in a browser or on a mobile device.
+-- Converted Twilio Client Quickstart Client over to Ruby
