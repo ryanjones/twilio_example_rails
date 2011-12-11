@@ -3,5 +3,8 @@
   <%= link_to 'New SMS', new_sms_message_path %>
 </div>
 <div id="client">
-  <%= link_to 'New Phone Call', new_phone_call_path %>
+  <%= link_to 'New Phone Call - Waffle Client', :controller => "phone_calls", :action => "new", :client => "Waffles"  %>
+  <br/>
+  <%= link_to 'New Phone Call - Ninja Client', :controller => "phone_calls", :action => "new", :client => "Ninja"  %>
+
 </div>

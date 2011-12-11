@@ -1,6 +1,7 @@
 TwilioExampleRails::Application.routes.draw do
 
-
+  root :to => "pages#index"
+   
   resource :sms_message, :only => [:new, :create, :incoming, :status ] do
     member do 
       get :new # form for sms_message 
@@ -10,10 +11,12 @@ TwilioExampleRails::Application.routes.draw do
     end
   end
   
-  resource :phone_call, :only => [:new, :incoming] do
+  match "/phone_call/new/:client" => "phone_calls#new" 
+  
+  resource :phone_call, :only => [:incoming, :new] do
     member do 
-      get :new # create a call
       post :incoming # incoming phone call
+      get :new
     end
   end
 
@@ -67,7 +70,6 @@ TwilioExampleRails::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => "pages#index"
 
   # See how all your routes lay out with "rake routes"
 

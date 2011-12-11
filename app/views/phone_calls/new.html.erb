@@ -9,10 +9,14 @@
       type="text/css" rel="stylesheet" />
     <script type="text/javascript">
     // This should all be put in a .js file, just here for demo purposes
-      Twilio.Device.setup("<%= @phone_call.capability_token %>");
- 
+      try {
+        Twilio.Device.setup("<%= @phone_call.capability_token %>");
+      } catch (err) {
+        console.log("Adobe Flash is required to use Twilio Client.");
+      }
+
       Twilio.Device.ready(function (device) {
-        $("#log").text("Ready");
+        $("#log").text("Client <%= @client %> is ready");
       });
  
       Twilio.Device.error(function (error) {
@@ -27,6 +31,20 @@
         $("#log").text("Incoming connection from " + conn.parameters.From);
         // accept the incoming connection and start two-way audio
         conn.accept();
+      });
+      
+      Twilio.Device.presence(function (pres) {
+        if (pres.available) {
+          // create an item for the client that became available
+          $("<li>", {id: pres.from, text: pres.from}).click(function () {
+            $("#number").val(pres.from);
+            call();
+          }).prependTo("#people");
+        }
+        else {
+          // find the item by client name and remove it
+          $("#" + pres.from).remove();
+        }
       });
       
       function call() {
@@ -57,5 +75,7 @@
       placeholder="Enter a phone number to call"/>
     
     <div id="log">Loading voice app...</div>
+    
+    <ul id="people"/>
   </body>
 </html>

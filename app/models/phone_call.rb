@@ -3,11 +3,12 @@ require 'logger'
 
 class PhoneCall < Object
 
-  attr_accessor :phone_number, :twilio_number, :capability_token
+  attr_accessor :phone_number, :twilio_number, :capability_token, :client_name
 
   def initialize(attributes = nil)
     @phone_number = attributes[:phone_number] unless attributes.nil?
     @twilio_number = attributes[:twilio_number] unless attributes.nil?
+    @client_name = attributes[:client_name] unless attributes.nil?
     
     @account_sid = 'AC93c2fb02b30b4519a375123963434361'
     @auth_token = '5009e2c4fd8882407a4f0231f382d8db'
@@ -49,7 +50,7 @@ private
     capability.allow_client_outgoing 'AP1b66ab4d812f4ac1b48fb4de24cc626b'
     
     # allow incoming calls to user RyanonRails
-    capability.allow_client_incoming 'RyanonRails'
+    capability.allow_client_incoming @client_name
    
     # generate the token string
     @capability_token = capability.generate

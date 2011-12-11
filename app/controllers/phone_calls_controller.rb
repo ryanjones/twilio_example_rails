@@ -1,13 +1,22 @@
 class PhoneCallsController < ApplicationController
   
   def new
-    @phone_call = PhoneCall.new
+    if params[:client]
+      # Load the client's name or whatever from the and put it as the client name
+      @phone_call = PhoneCall.new({:client_name => params[:client]})
+      @client = @phone_call.client_name 
+    else
+      # Load the client's name or whatever from the and put it as the client name
+      @phone_call = PhoneCall.new({:client_name => 'NoClient'})
+      @client = @phone_call.client_name 
+    end
   end
   
   def incoming
     num = params[:PhoneNumber]
-    
-    if num.is_a?(Numeric)
+
+    # Check for number
+    if /^[\d]+(\.[\d]+){0,1}$/ === num
       # dialing via number!
       # build up a response
       response = Twilio::TwiML::Response.new do |r|
@@ -15,7 +24,7 @@ class PhoneCallsController < ApplicationController
           d.Number num
         end
       end
-    elsif
+    else
       # dialing via name!
       # build up a response
       response = Twilio::TwiML::Response.new do |r|
