@@ -1,6 +1,7 @@
 class PhoneCallsController < ApplicationController
   
   def new
+    debugger
     if params[:client]
       # Load the client's name or whatever from the and put it as the client name
       @phone_call = PhoneCall.new({:client_name => params[:client]})
