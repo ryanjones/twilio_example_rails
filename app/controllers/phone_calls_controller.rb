@@ -10,6 +10,7 @@ class PhoneCallsController < ApplicationController
       @phone_call = PhoneCall.new({:client_name => 'NoClient'})
       @client = @phone_call.client_name 
     end
+
   end
   
   def incoming
